@@ -16,7 +16,7 @@ Make sure the following are installed **before proceeding**:
 ###  Step 1 — Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/genstudio-app.git
+git clone https://github.com/diva354/genstudio-app.git
 cd genstudio-app
 ```
 
