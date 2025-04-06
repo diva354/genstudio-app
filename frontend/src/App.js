@@ -23,7 +23,7 @@ function App() {
       /*const response = await fetchWithTimeout(`http://localhost:8080/romannumeral?query=${input}`,{}, 5000);*/
       const response = await axios.get('http://localhost:8080/romannumeral', {
         params: { query: input },
-        timeout: 500, // optional timeout in ms
+        timeout: 5000, // optional timeout in ms
       });
 
       if (response.data?.output) {
