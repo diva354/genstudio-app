@@ -42,9 +42,9 @@ This will automatically build and start:
 
 Once running, open your browser:
 
-- 🖥️ **Frontend App** → [http://localhost:3000](http://localhost:3000)
-- 🧠 **API Endpoint** → [http://localhost:8080/romannumeral?query=10](http://localhost:8080/romannumeral?query=10)
-- 📊 **Metrics Endpoint** → [http://localhost:8080/metrics](http://localhost:8080/metrics)
+-  **Frontend App** → [http://localhost:3000](http://localhost:3000)
+-  **API Endpoint** → [http://localhost:8080/romannumeral?query=10](http://localhost:8080/romannumeral?query=10)
+-  **Metrics Endpoint** → [http://localhost:8080/metrics](http://localhost:8080/metrics)
 
 ---
 
