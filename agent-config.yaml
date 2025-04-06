@@ -1,0 +1,45 @@
+metrics:
+  global:
+    scrape_interval: 15s
+
+  configs:
+    - name: genstudio-app
+      scrape_configs:
+        - job_name: 'backend'
+          static_configs:
+            - targets: ['backend:8080']
+
+      remote_write:
+        - url: https://prometheus-prod-36-prod-us-west-0.grafana.net/api/prom/push
+          basic_auth:
+            username: 2360127
+            password: glc_eyJvIjoiMTM5MzIwMSIsIm4iOiJzdGFjay0xMjE3OTQ0LWhtLXJlYWQtYWdlbnQtd3JpdGUta2V5IiwiayI6IjJsOTVnVmtLUFFRNEIyQTRtOTBuOFo1WiIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19
+logs:
+  configs:
+    - name: genstudio-logs
+      positions:
+        filename: /tmp/positions.yaml
+      clients:
+        - url: https://logs-prod-021.grafana.net/loki/api/v1/push
+          basic_auth:
+            username: 1175741
+            password: glc_eyJvIjoiMTM5MzIwMSIsIm4iOiJzdGFjay0xMjE3OTQ0LWhsLXJlYWQtYWdlbnQtd3JpdGUta2V5IiwiayI6ImkwYTYxcjk0MkFlQXJFNzBlUTNrRXcxQSIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19
+      scrape_configs:
+        - job_name: backend-logs
+          static_configs:
+            - targets: [localhost]
+              labels:
+                job: backend
+                __path__: /var/log/backend/*.log
+traces:
+  configs:
+    - name: genstudio-traces
+      receivers:
+        otlp:
+          protocols:
+            http: {}
+      remote_write:
+        - endpoint: tempo-prod-15-prod-us-west-0.grafana.net:443
+          basic_auth:
+            username: 1170053
+            password: glc_eyJvIjoiMTM5MzIwMSIsIm4iOiJzdGFjay0xMjE3OTQ0LWh0LXJlYWQtYWdlbnQtd3JpdGUta2V5IiwiayI6IkNhdXA0M0M2Zjd2RjU1MTNqaWc2Z0Y1eCIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19

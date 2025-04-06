@@ -1,16 +1,51 @@
 version: '3.9'
+
 services:
   backend:
     build: ./backend
     ports:
-      - '8080:8080'
-    env_file:
-      - ./backend/.env
-    restart: unless-stopped
+      - "8080:8080"
+    volumes:
+      - backend-logs:/var/log/backend
+    networks:
+      observability: {}
 
   frontend:
     build: ./frontend
     ports:
-      - '3000:80'
+      - "3000:80"
     depends_on:
       - backend
+    networks:
+      observability: {}
+
+  grafana-agent:
+    image: grafana/agent:latest
+    container_name: grafana-agent
+    volumes:
+      - ./agent-config.yaml:/etc/agent-config.yaml
+      - backend-logs:/var/log/backend
+    command: ["--config.file=/etc/agent-config.yaml"]
+    ports:
+      - "4318:4318"
+    networks:
+      observability: {}
+
+  backend-tests:
+    build: ./backend
+    command: ["npm", "run", "test:ci"]
+    networks:
+      observability: {}
+
+  frontend-tests:
+    build: ./frontend
+    command: ["npm", "run", "test:ci"]
+    networks:
+      observability: {}
+
+volumes:
+  backend-logs:
+
+networks:
+  observability:
+    driver: bridge

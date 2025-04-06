@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN mkdir -p /var/log/backend
+
 EXPOSE 8080
 
 CMD ["node", "index.js"]
