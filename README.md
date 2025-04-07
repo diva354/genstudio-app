@@ -86,7 +86,7 @@ To enable observability features (metrics, logs, traces):
    ```bash
    cp agent-config.example.yaml agent-config.yaml
    ```
-2. **Edit `agent-config.yaml`** and replace the following placeholders with your own Grafana Cloud credentials:
+2. **Edit `agent-config.yaml`** and replace the following placeholders with provided Grafana Cloud credentials:
 
    - `PROVIDED_PROM_USERNAME`
    - `PROVIDED_PROM_PASSWORD`
