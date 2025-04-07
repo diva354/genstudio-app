@@ -1,0 +1,11 @@
+# Ignore sensitive local configs
+agent-config.yaml
+# Node.js
+node_modules/
+.env
+
+# Logs
+*.log
+
+# OS
+.DS_Store
