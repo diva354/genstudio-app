@@ -75,6 +75,31 @@ All observability data is streamed to **Grafana Cloud** using a preconfigured `a
 
 ---
 
+### 🔐 Using the Example Config
+
+This project includes a redacted `agent-config.example.yaml` file for safe public sharing.
+
+To enable observability features (metrics, logs, traces):
+
+1. **Duplicate the example file:**
+
+   ```bash
+   cp agent-config.example.yaml agent-config.yaml
+   ```
+2. **Edit `agent-config.yaml`** and replace the following placeholders with your own Grafana Cloud credentials:
+
+   - `PROVIDED_PROM_USERNAME`
+   - `PROVIDED_PROM_PASSWORD`
+   - `PROVIDED_LOKI_USERNAME`
+   - `PROVIDED_LOKI_PASSWORD`
+   - `PROVIDED_TEMPO_USERNAME`
+   - `PROVIDED_TEMPO_PASSWORD`
+  
+   
+with your own **Grafana Cloud credentials**, which you can find on the **Prometheus**, **Loki**, and **Tempo** connection pages in your Grafana Cloud account.
+
+---
+
 ### 🧾 **Notes**
 
 - ✅ All environment-specific secrets are embedded for review (no manual setup required)
