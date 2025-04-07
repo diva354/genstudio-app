@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1743721450749" clover="3.2.0">
-  <project timestamp="1743721450749" name="All files">
+<coverage generated="1744052307871" clover="3.2.0">
+  <project timestamp="1744052307871" name="All files">
     <metrics statements="10" coveredstatements="10" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1" elements="17" coveredelements="17" complexity="0" loc="10" ncloc="10" packages="1" files="1" classes="1"/>
     <file name="convert.js" path="C:\Users\ndcal\Desktop\Adobe Test\genstudio-app\backend\convert.js">
       <metrics statements="10" coveredstatements="10" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>

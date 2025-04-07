@@ -1,26 +1,32 @@
 import './App.css';
-import React, {useState} from 'react';
-import { Provider, defaultTheme, View, TextField, Button, Text, Form, Header, Heading, Flex } from '@adobe/react-spectrum';
+import React, {useState, useEffect} from 'react';
+import { Provider, defaultTheme, View, TextField, Button, Heading, Flex, InlineAlert, Form } from '@adobe/react-spectrum';
 import axios from 'axios';
 
 function App() {
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
-  const [error, setError] = useState(null);
-  const [isLoading, setisLoading] = useState(false);
-  
-  const handleConvert = async () => {
+  const [inputError, setInputError] = useState(null); // Separating Input and SErver/System errors so its clear if its Frontend or Backend error
+  const [serverError, setServerError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (serverError) {
+      document.getElementById('server-error-msg')?.focus();
+    }
+  }, [serverError]);
+  const handleConvert = async (e) => {
+    e.preventDefault();
     setResponse('');
-    setError('');
-    setisLoading(true);
+    setInputError('');
+    setServerError('');
+    setIsLoading(true);
     if (!input || isNaN(input) || input < 1 || input > 3999) {
-      setError('Input Invalid. Please enter a valid whole number between 1 and 3999.');
-      setisLoading(false);
+      setInputError('Input Invalid. Please enter a valid whole number between 1 and 3999.'); // first layer - Frontend validation before hits Backend 
+      setIsLoading(false);
       return;
     }
 
     try {
-      /*const response = await fetchWithTimeout(`http://localhost:8080/romannumeral?query=${input}`,{}, 5000);*/
       const response = await axios.get('http://localhost:8080/romannumeral', {
         params: { query: input },
         timeout: 5000, // optional timeout in ms
@@ -29,94 +35,95 @@ function App() {
       if (response.data?.output) {
         setResponse(response.data.output);
       } else {
-        setError('Invalid response from server.');
+        setServerError('Invalid response from server.'); // In case of invalid json response
       }
-      /*if (!response.ok) {
-        const { errorMessage, statusCode } = await response.json();
-        
-        switch(statusCode) {
-          case 400:
-            setError(errorMessage || 'Bad Request');
-            break;
-          case 500:
-            setError(errorMessage || 'Internal Server Error');
-            break;
-          default:
-            setError(errorMessage || 'Unexpected Error');
-            break;
-        }
-
-        return;
-      }
-      const data = await response.json();
-      setResponse(data.output);*/
     } catch (err) {
-      debugger
-      /*console.error(err.message);
-      if (err instanceof TypeError && err.message === 'Failed to fetch') {
-        setError('Unable to reach server. You might be offline or facing a CORS issue.');
-      } else if (err.message === 'Request timed out') {
-        setError('Sorry your request timed out. Please try again.')
-      } else {
-        setError('Unexpected error occurred.');
-      }*/
       if (err.response) {
         // Server responded with a non-2xx status
         const { statusText, status } = err.response;
-
+        const { errorMessage, field } = err.response.data || {};
+        const message = errorMessage || statusText;
         switch (status) {
           case 400:
-            setError(statusText || 'Bad Request');
+            if(field === 'query'){
+              setInputError(errorMessage || 'Invalid Input'); // In case of any invalid request
+            }else {
+              setServerError(message || 'Bad Request')
+            }
             break;
           case 500:
-            setError(statusText || 'Internal Server Error');
+            setServerError(message || 'Internal Server Error'); // In case of something going wrong with the server
             break;
           default:
-            setError(statusText || `Unexpected error (code ${status})`);
+            setServerError(message || `Unexpected error (code ${status})`); //Any unexpected error
             break;
         }
 
       } else if (err.code === 'ECONNABORTED') {
-        setError('Request timed out. Please try again.');
+        setServerError('Request timed out. Please try again.'); // Axios returning request time out error
       } else if (!navigator.onLine) {
-        // User is offline
-        setError('You appear to be offline. Please check your internet connection.');
+        setServerError('You appear to be offline. Please check your internet connection.'); // User is offline
       } else {
-        // Generic fallback
-        setError('Something went wrong. Unable to reach the server.');
+        setServerError('Something went wrong. Unable to reach the server.');  // Generic fallback
       }
     } finally {
-      setisLoading(false);
+      setIsLoading(false);
     }
   };
+  
   return (
-    <>
       <Provider theme={defaultTheme} scale='large'>
         <View padding="size-400" width="auto" height="50%" justifySelf={'center'}>
           <Flex direction="column" alignItems='start' justifyContent={'center'}>
             <Heading>Roman numeral converter </Heading>
-                {input === '9999' && (() => { throw new Error('Simulated render crash'); })()}
-                <TextField
-                  label="Enter a number"
-                  value={input}
-                  onChange={setInput}
-                  type="number"
-                  width="size-3000"
-                  validationState={!!error ? 'invalid' : undefined}
-                  errorMessage={error}
-                />
-                <Button variant="primary" onPress={handleConvert} marginTop="size-200" width='size-2500' isPending={isLoading} isDisabled={isLoading}>
-                  Convert to roman numeral
-                </Button>
+            <Form onSubmit={handleConvert} necessityIndicator='label'> 
+              <TextField
+                label="Enter a number"
+                isRequired
+                value={input}
+                onChange={setInput}
+                type="number"
+                width="size-3000"
+                validationState={inputError ? 'invalid' : undefined}
+                errorMessage={inputError}
+                autoFocus
+              />
+              <div
+                aria-keyshortcuts="Enter"
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  height: '1px',
+                  width: '1px',
+                  overflow: 'hidden'
+                }}
+              >
+                Press Enter to convert the number to Roman numeral
+              </div>
+
+              <Button type="submit" variant="primary" marginTop="size-200" width='size-2500' isPending={isLoading} isDisabled={isLoading}>
+                Convert to roman numeral
+              </Button>
+            </Form>
+                
 
                 <Flex marginTop="size-300" maxWidth="size-3000">
-                  {/* {error && <Text UNSAFE_style={{ color: 'red' }}>{error}</Text>} */}
-                  {response && <Text>Roman numeral: {response}</Text>}
+                  {serverError && (
+                    <InlineAlert variant="notice" role="alert" aria-live="polite" id="server-error-msg"
+                    tabIndex="-1">
+                      <Heading>System Error</Heading>
+                      {serverError}
+                    </InlineAlert>
+                  )}
+                  {response && (
+                    <InlineAlert variant="info" margin={"size-100"} role="status" aria-live="polite">
+                      Roman numeral: {response}
+                    </InlineAlert>
+                  )}
                 </Flex>
           </Flex>
         </View>
       </Provider>
-    </>
   );
 }
 

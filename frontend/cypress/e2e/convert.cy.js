@@ -20,10 +20,8 @@ describe('Roman Numeral Converter', () => {
     it('shows correct message when clicked without input', () => {
         cy.visit('http://localhost:3000');
     
-        cy.get('input[type="number"]').type('101');
         cy.contains('Convert').click();
-    
-        cy.contains('Roman numeral: CI').should('be.visible');
+        cy.contains('Input Invalid. Please enter a valid whole number between 1 and 3999.').should('be.visible');
       });
   
     it('shows error for invalid input', () => {
