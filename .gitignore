@@ -1,0 +1,9 @@
+# Ignore sensitive local configs
+agent-config.yaml
+.env
+
+# Logs
+*.log
+
+# OS
+.DS_Store
