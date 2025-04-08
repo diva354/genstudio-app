@@ -1,3 +1,5 @@
+
+
 require('dotenv').config();
 require('./tracing');
 const express = require('express');
@@ -75,7 +77,11 @@ app.get('/health', (req, res) => {
       timestamp: new Date().toISOString()
     });
   });
-  
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+
+  module.exports = app;
+
+  if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+    });
+  }
