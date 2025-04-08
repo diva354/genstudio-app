@@ -163,6 +163,16 @@ Once running, open your browser:
 ---
 
 ### **Step 4 — Run Backend & Frontend Tests (Optional)**
+#### About Testing Setup
+
+This project supports multiple levels of automated testing:
+
+- ✅ `docker compose up backend-tests frontend-tests` runs:
+  - **Backend unit + integration tests** (via Jest & Supertest)
+  - **Frontend component tests** (via React Testing Library)
+
+> ⚠️ **Note:** End-to-end tests using **Cypress** are **not** included in the Docker Compose test containers.  
+> You’ll need to run them manually using the instructions below.
 
 To run all tests inside Docker:
 
@@ -172,6 +182,44 @@ docker compose up backend-tests frontend-tests
 
 - ✅ Backend unit tests via **Jest + Supertest**
 - ✅ Frontend component tests via **React Testing Library**
+
+---
+### 🧪 Manually Running Cypress (End-to-End) Tests
+
+To run Cypress tests manually and interactively on your machine:
+
+####  Prerequisites
+
+- Make sure the app is running (via Docker or locally):
+
+```bash
+docker compose up
+```
+This starts the frontend on http://localhost:3000
+
+####  Run Cypress UI
+
+Inside the `frontend` folder:
+
+```bash
+cd frontend
+npx cypress open
+```
+This opens the Cypress Test Runner UI where you can pick and run individual test files.
+
+####  Headless Mode (Optional)
+
+To run tests in headless mode:
+
+```bash
+npx cypress run
+```
+
+####  Notes
+
+- Cypress base URL is configured to point to `http://localhost:3000`
+- Ensure the backend service is also running for all integration tests to pass
+- All E2E tests are located inside `frontend/cypress/e2e/`
 
 ---
 
