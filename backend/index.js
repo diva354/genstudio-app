@@ -2,7 +2,7 @@ require('dotenv').config();
 require('./tracing');
 const express = require('express');
 const convertNumberToRoman = require('./convert');
-const { httpRequestCounter, register } = require('./metrics');
+const { httpRequestCounter, httpResponseTimeHistogram, register } = require('./metrics');
 const logger = require('./logger');
 const app = express();
 const cors = require('cors');
@@ -10,12 +10,15 @@ const port = 8080;
 app.use(cors());
 
 app.use((req, res, next) => {
+    const end = httpResponseTimeHistogram.startTimer(); //  Start timing
     res.on('finish', () => {
-      httpRequestCounter.inc({
-        method: req.method,
-        route: req.path,
-        statusCode: res.statusCode,
-      });
+        const labels = {
+            method: req.method,
+            route: req.path,
+            statusCode: res.statusCode,
+        };
+        httpRequestCounter.inc(labels);       // Count request
+        end(labels);                          // Record response time
     });
     next();
   });
@@ -65,7 +68,14 @@ app.get('/metrics', async (req, res) => {
     res.end(await register.metrics());
   });
   
-
+app.get('/health', (req, res) => {
+    res.status(200).json({
+      status: 'ok',
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString()
+    });
+  });
+  
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
