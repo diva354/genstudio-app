@@ -78,36 +78,35 @@ It leverages modern browser features like `fetch`, `async/await`, and system the
 ###  Light Mode 
 #### Desktop 
 
-![Light Mode Conversion](./screenshots/desktop-light.png)
+<img src="./screenshots/desktop-light.png" width=50% height=50%>
 
 #### Tablet
 
-![Light Mode Conversion](./screenshots/tablet-light-result.png)
-
-![Light Mode Conversion](./screenshots/tablet-light-error.png)
+<img src="./screenshots/tablet-light-result.png" width=50% height=50%>
+<img src="./screenshots/tablet-light-error.png" width=50% height=50%>
 
 #### Mobile
 
-![Light Mode Conversion](./screenshots/mobile-light-error.png)
+<img src="./screenshots/mobile-light-error.png" width=50% height=30%>
 
 ###  Dark Mode 
 #### Desktop 
-
-![Dark Mode Validation Error](./screenshots/desktop-dark.png)
-![Dark Mode Validation Error](./screenshots/desktop-dark-input-error.png)
-![Dark Mode Validation Error](./screenshots/desktop-dark-result.png)
+<img src="./screenshots/desktop-dark.png" width=50% height=50%>
+<img src="./screenshots/desktop-dark-input-error.png" width=50% height=50%>
+<img src="./screenshots/desktop-dark-result.png" width=50% height=50%>
 
 #### Tablet
 
-![Dark Mode Validation Error](./screenshots/tablet-dark.png)
-![Dark Mode Validation Error](./screenshots/tablet-dark-error.png)
-![Dark Mode Validation Error](./screenshots/tablet-dark-result.png)
+<img src="./screenshots/tablet-dark.png" width=50% height=50%>
+<img src="./screenshots/tablet-dark-error.png" width=50% height=50%>
+<img src="./screenshots/tablet-dark-result.png" width=50% height=50%>
 
 #### Mobile
-![Dark Mode Validation Error](./screenshots/mobile-dark.png)
-![Dark Mode Validation Error](./screenshots/mobile-dark-error.png)
-![Dark Mode Validation Error](./screenshots/mobile-dark-result.png)
-![Dark Mode Validation Error](./screenshots/mobile-dark-system-error.png)
+
+<img src="./screenshots/mobile-dark.png" width=50% height=10%>
+<img src="./screenshots/mobile-dark-error.png" width=50% height=10%>
+<img src="./screenshots/mobile-dark-result.png" width=50% height=10%>
+<img src="./screenshots/mobile-dark-system-error.png" width=50% height=10%>
 
 
 ---
