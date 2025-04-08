@@ -1,4 +1,4 @@
-## 🧭 Overview
+##  Overview
 
 **GenStudio Roman Numeral Converter** is a fully responsive, accessible, and Dockerized full-stack web application built as part of the **Adobe GenStudio Engineering Assessment**.
 
@@ -6,7 +6,7 @@ This tool allows users to convert standard Arabic numerals (from **1 to 3999**) 
 
 ---
 
-## 🚀 Features & Functionality
+##  Features & Functionality
 
 -  **Live conversion**: Enter a number and get the Roman numeral instantly.
 -  **Smart validation**:
@@ -19,7 +19,7 @@ This tool allows users to convert standard Arabic numerals (from **1 to 3999**) 
 -  **Fully observable**: Metrics, logs, and traces all shipped to Grafana Cloud via Grafana Agent.
 
 ---
-## ⚙️ Architecture & Key Features
+##  Architecture & Key Features
 
 - **Frontend**:  
   Built with **React** and styled using **Adobe React Spectrum**, leveraging its accessible design system and ARIA-first approach. Supports client-side validation, form state management, and dynamic feedback rendering via `InlineAlert`.
@@ -50,7 +50,7 @@ This tool allows users to convert standard Arabic numerals (from **1 to 3999**) 
 
 ---
 
-## 📱 Device & Browser Support
+##  Device & Browser Support
 
 This app is built with **responsive design** in mind and tested on:
 
@@ -61,7 +61,7 @@ This app is built with **responsive design** in mind and tested on:
 
 It adapts to light/dark mode based on system preferences.
 
-### 🌐 Browser Compatibility
+###  Browser Compatibility
 
 This app has been tested and works reliably on:
 
@@ -73,9 +73,9 @@ It leverages modern browser features like `fetch`, `async/await`, and system the
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
-### ✅ Light Mode 
+###  Light Mode 
 #### Desktop 
 
 ![Light Mode Conversion](./screenshots/desktop-light.png)
@@ -90,7 +90,7 @@ It leverages modern browser features like `fetch`, `async/await`, and system the
 
 ![Light Mode Conversion](./screenshots/mobile-light-error.png)
 
-### 🌙 Dark Mode 
+###  Dark Mode 
 #### Desktop 
 
 ![Dark Mode Validation Error](./screenshots/desktop-dark.png)
@@ -112,7 +112,7 @@ It leverages modern browser features like `fetch`, `async/await`, and system the
 
 ---
 
-## 🚀 How to Run This App Locally (via Docker)
+##  How to Run This App Locally (via Docker)
 
 This project is fully containerized. Follow the steps below to clone, build, and run it from scratch.
 
@@ -189,7 +189,7 @@ All observability data is streamed to **Grafana Cloud** using a preconfigured `a
 
 ---
 
-### 🔐 Using the Example Config
+###  Using the Example Config
 
 This project includes a redacted `agent-config.example.yaml` file for safe public sharing.
 
@@ -214,7 +214,7 @@ with your own **Grafana Cloud credentials**, which you can find on the **Prometh
 
 ---
 
-### 🧾 **Notes**
+###  **Notes**
 
 - ✅ All environment-specific secrets are embedded for review (no manual setup required)
 - 📄 Winston logs are stored at `/var/log/backend/app.log` and tailed by the Grafana Agent
@@ -223,7 +223,7 @@ with your own **Grafana Cloud credentials**, which you can find on the **Prometh
 ---
 
 <details>
-<summary>🧠 <strong>Assumptions, Decisions & Trade-offs</strong></summary>
+<summary> <strong>Assumptions, Decisions & Trade-offs</strong></summary>
 
 <br/>
 
@@ -368,7 +368,7 @@ with your own **Grafana Cloud credentials**, which you can find on the **Prometh
 
 > _The `/health` route covers the essentials for this app's scope, while leaving room for deeper system awareness in a full production deployment._
 ---
-### 🧑‍🦯 Accessibility First Approach
+###  Accessibility First Approach
 
 - Assumed the app would be used by a wide range of users, including screen reader and keyboard users.
 - Chose Adobe React Spectrum for its built-in ARIA support and WCAG-compliant design tokens.
@@ -376,9 +376,9 @@ with your own **Grafana Cloud credentials**, which you can find on the **Prometh
 </details>
 
 ---
-## 🔮 Optional: Future Improvements  
+##  Optional: Future Improvements  
 
-### 🌐 Add Client-Side Metrics Collection
+###  Add Client-Side Metrics Collection
 
 - **Motivation**:  
   While backend metrics (e.g. request count, response time) give valuable visibility into server performance, they do **not capture latency introduced by network delays** or issues on the client side — especially when serving a global user base.
