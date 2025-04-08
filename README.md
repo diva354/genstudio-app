@@ -61,9 +61,17 @@ This app is built with **responsive design** in mind and tested on:
 
 It adapts to light/dark mode based on system preferences.
 
----
+### 🌐 Browser Compatibility
 
-## 📸 Screenshots
+This app has been tested and works reliably on:
+
+- ✅ **Google Chrome** — Version **90 and above**
+- ✅ **Safari** — Version **13 and above**
+
+It leverages modern browser features like `fetch`, `async/await`, and system theme detection (`prefers-color-scheme`), which are supported in all the above versions.
+
+
+---
 
 ## 📸 Screenshots
 
