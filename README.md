@@ -267,6 +267,21 @@ with your own **Grafana Cloud credentials**, which you can find on the **Prometh
 - 📄 Winston logs are stored at `/var/log/backend/app.log` and tailed by the Grafana Agent
 - 🔗 Trace data is sent to Tempo using OpenTelemetry over OTLP (HTTP)
 
+### **Screenshots**
+ Prometheus Metrics
+
+ <img src="./screenshots/prometheus-metrics.png" width=60% height=50%>
+
+ Loki Logs
+
+ <img src="./screenshots/loki-logs.png" width=50% height=10%>
+
+ Tempo traces
+
+ <img src="./screenshots/tempo-traces.png" width=50% height=10%>
+
+ 
+
 ---
 
 <details>
